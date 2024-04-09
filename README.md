@@ -6,10 +6,10 @@ Testing teh webhook.....
 
 ## CICD Infra setup
 1) ###### GitHub setup
-    Fork GitHub Repository by using the existing repo "effulgencetech-nodejs-docker-repo" (https://github.com/Michaelgwei86/effulgencetech-nodejs-repo.git )     
+    Fork GitHub Repository by using the existing repo "Docker-nodejs-docker-repo" (https://github.com/asaphdanchi/Docker-nodejs-repo.git)     
     - Go to GitHub (github.com)
     - Login to your GitHub Account
-    - **Fork repository "effulgencetech-nodejs-docker-repo" (https://github.com/Michaelgwei86/effulgencetech-nodejs-repo.git) & name it "effulgencetech-nodejs-repo.git"**
+    - **Fork repository "Docker-nodejs-docker-repo" (https://github.com/asaphdanchi/Docker-nodejs-repo.git) & name it "Docker-nodejs-repo.git"**
     - Clone your newly created repo to your local
 
 2) ###### Jenkins
@@ -23,8 +23,9 @@ Testing teh webhook.....
     - SSH into the instance and Run the following commands in the **jenkins-install.sh** file
 
 3) ###### Slack 
-    - **Join the slack channel https://devopswithmike.slack.com/archives/C0590M8QZ97**
-    - **Join into the channel "#effulgencetech-devops-channel"**
+    - Download the Slack app
+    - Create a workspace with the name eg "solavisetech"
+    - create a private channel with the name "Docker-pipeline-alert"
 
 ### Jenkins setup
 1) #### Access Jenkins
@@ -42,7 +43,7 @@ Testing teh webhook.....
 
 2)  #### Pipeline creation
     - Click on **New Item**
-    - Enter an item name: **effulgencetech-nodejs-docker-repo** & select the category as **Pipeline**
+    - Enter an item name: **SolaviseTech-nodejs-docker-repo** & select the category as **Pipeline**
     - Now scroll-down and in the Pipeline section --> Definition --> Select Pipeline script from SCM
     - SCM: **Git**
     - Repositories
@@ -62,7 +63,7 @@ Testing teh webhook.....
     - Click on Manage Jenkins --> Manage Credentials --> Global credentials (unrestricted) --> Add Credentials
         1)  ###### Slack secret token (slack-token)
             - Kind: Secret text            
-            - Secret: lXpiMy7yGJLm9V6OsMmdkKVS
+            - Secret: eg lXpiMy7yGJLm9V6OsMmdkKVS
             - ID: Slack-token
             - Description: Slack-token
             - Click on Create                
@@ -71,7 +72,7 @@ Testing teh webhook.....
             - Click on Manage Jenkins --> Configure System
 
             1)  - Go to section Slack
-                - Workspace: **devopswithmike** (if not working try with Team-subdomain devopswithmike)
+                - Workspace: **solavisetech** (if not working try with Team-subdomain devopswithmike)
                 - Credentials: select the slack-token credentials (created above) from the drop-down    
         3)  ###### Docker hub authentication (DOCKERHUB_CREDENTIALS)
             - Kind: Username and Password            
@@ -84,18 +85,18 @@ Testing teh webhook.....
 ### Performing continous integration with GitHub webhook
 
 1) #### Add jenkins webhook to github
-    - Access your repo **effulgencetech-nodejs-docker-repo** on github
+    - Access your repo **Docker-nodesjs-repo** on github
     - Goto Settings --> Webhooks --> Click on Add webhook 
     - Payload URL: **htpp://REPLACE-JENKINS-SERVER-PUBLIC-IP:8080/github-webhook/**    (Note: The IP should be public as GitHub is outside of the AWS VPC where Jenkins server is hosted)
     - Click on Add webhook
 
 2) #### Configure on the Jenkins side to pull based on the event
     - Access your jenkins server, pipeline **effulgencetech-nodejs-docker-repo**
-    - Once pipeline is accessed --> Click on Configure --> In the General section --> **Select GitHub project checkbox** and fill your repo URL of the project effulgencetech-devops-fully-automated.
+    - Once pipeline is accessed --> Click on Configure --> In the General section --> **Select GitHub project checkbox** and fill your repo URL of the project solavisetech-devops-fully-automated.
     - Scroll down --> In the Build Triggers section -->  **Select GitHub hook trigger for GITScm polling checkbox**
 
 Once both the above steps are done click on Save.
 
 
 ## Finally observe the whole flow and understand the integrations :) 
-# Happy learning from EffulgenceTech
+# Happy learning from SolaviseTech
